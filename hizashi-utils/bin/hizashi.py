@@ -27,7 +27,9 @@ parser_initproject.add_argument(
     'project_name', type=str, help='Django Project name')
 parser_initproject.add_argument(
     '--template', type=str, help='Django Project name',
-    default='/home/dodobas/PROJEKTI/HIZASHI/hizashi-project-template/'
+    default=(
+        'https://github.com/dodobas/hizashi-project-template/archive/'
+        'master.zip')
 )
 parser_initproject.set_defaults(func=initproject)
 
