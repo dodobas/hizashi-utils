@@ -9,7 +9,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     scripts=['hizashi-utils/bin/hizashi.py'],
-    url='',
+    url='https://github.com/dodobas/hizashi-utils',
     license='LICENSE.txt',
     description='Utils for managing Hizashi Django environment',
     setup_requires=[
