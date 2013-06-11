@@ -41,6 +41,22 @@ Optional parameters:
 
 * *template* - path or url for a Django project template, defaults to https://github.com/dodobas/hizashi-project-template/archive/master.zip
 
+
+makedocs
+^^^^^^^^
+
+To builds Sphinx docs execute:
+
+    hizashi.py makedocs
+
+Optional parameters:
+
+* *type* - documentation type, defaults to *html*, mimics sphinx Makefile
+* *publish* - switch to activate the Publish server, a documentation HTTP server
+* *host* - Publish server host, defaults to '127.0.0.1'
+* *port* - Publish server port, defaults to '54299'
+
+
 Application level utilities
 ---------------------------
 
