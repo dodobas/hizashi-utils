@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import sys
 
@@ -43,22 +44,24 @@ def is_file(path):
         return False
 
 
+def get_docs_folder():
+    """
+    Returns docs path of a Django Hizashi project
+    """
+    root_path = get_hizashi_root()
+
+    docs_path = os.path.join(root_path, 'docs')
+    return docs_path if is_writable(docs_path) else None
+
+
 def get_hizashi_project():
     """
     Returns root path of a Django Hizashi project
     """
     root_path = get_hizashi_root()
-    if root_path:
-        project_path = os.path.join(root_path, 'django_project')
-        return project_path if is_writable(project_path) else None
-    else:
-        print(
-            'Path "{0}" is not a subdirectory of a Django Hizashi project.\n'
-            'Please change your current working directory to a Django '
-            'Hizashi project folder.'.format(os.getcwd())
-        )
-        # terminate
-        sys.exit(1)
+
+    project_path = os.path.join(root_path, 'django_project')
+    return project_path if is_writable(project_path) else None
 
 
 def get_hizashi_root():
@@ -70,9 +73,16 @@ def get_hizashi_root():
     cur_dir = os.getcwd()
     while cur_dir != '/':
         if is_file(os.path.join(cur_dir, HIZASHI_ID)):
+            # return hizashi project root
             return cur_dir
         else:
             # go back one folder
             cur_dir = os.path.normpath(os.path.join(cur_dir, '..'))
     else:
-        return None
+        print(
+            'Path "{0}" is not a subdirectory of a Django Hizashi project.\n'
+            'Please change your current working directory to a Django '
+            'Hizashi project folder.'.format(os.getcwd())
+        )
+        # terminate
+        sys.exit(1)

@@ -4,7 +4,11 @@ import sys
 
 from django.core import management
 
-from .utils import HIZASHI_ID, get_hizashi_project, CHDir
+from .utils import (
+    HIZASHI_ID, CHDir,
+    get_hizashi_project,
+    get_docs_folder,
+)
 
 
 def initproject(args):
@@ -21,6 +25,7 @@ def initproject(args):
         template=args.template,
         extensions=['.py', '.rst'], verbosity=0)
 
+    # create Hizashi project identification file
     project_folder = os.path.join(os.getcwd(), args.project_name)
     project_identifier = os.path.join(project_folder, HIZASHI_ID)
     with open(project_identifier, 'wb') as proj_file:
@@ -28,7 +33,6 @@ def initproject(args):
             "DO NOT DELETE\n\n"
             "Django Hizashi project identifier.\n\n"
             "DO NOT DELETE\n")
-
     print(' ...done')
 
 
@@ -53,3 +57,38 @@ def initapp(args):
     print(
         '\nAdd \'{}\' to INSTALLED_APPS in \'core/settings/project.py\''
         .format(args.application_name))
+
+
+def makedocs(args):
+    try:
+        import sphinx
+    except ImportError:
+        print(
+            'Sphinx package is missing, please install it in your virtualenv'
+            'using pip: "pip install Sphinx"')
+    docs_path = get_docs_folder()
+
+    with CHDir(docs_path):
+        build_result = sphinx.main(
+            ['dummy_arg', '-b', args.type, 'source', 'build/html'])
+
+        if build_result:
+            # on any error during the build, terminate
+            sys.exit(1)
+
+    if args.publish and args.type in ('html', 'dirhtml', 'singlehtml'):
+        docs_build_path = os.path.join(docs_path, 'build', 'html')
+        with CHDir(docs_build_path):
+            import SimpleHTTPServer
+            import SocketServer
+
+            SocketServer.TCPServer.allow_reuse_address = True
+            Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
+
+            httpd = SocketServer.TCPServer((args.host, args.port), Handler)
+
+            print(
+                'Publish server address: http://', args.host, ':',
+                args.port, sep='')
+            print('\nTerminate with CTRL-C\n')
+            httpd.serve_forever()

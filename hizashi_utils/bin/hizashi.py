@@ -35,6 +35,30 @@ parser_initapp.add_argument(
 )
 parser_initapp.set_defaults(func=modules.initapp)
 
+# makedocs options
+parser_makedocs = subparsers.add_parser(
+    'makedocs', help='Builds Django Hizashi documentation'
+)
+parser_makedocs.add_argument(
+    '--type', type=str, help='Sphinx documentation target (default: html)',
+    default='html'
+)
+parser_makedocs.add_argument(
+    '--publish', help=(
+        'Start publish server, a documentation HTTP server'),
+    action='store_true'
+)
+parser_makedocs.add_argument(
+    '--host', type=str, help='Publish server host (default: 127.0.0.1)',
+    default='127.0.0.1'
+)
+parser_makedocs.add_argument(
+    '--port', type=int, help='Publish server port (default: 54299)',
+    default=54299
+)
+parser_makedocs.set_defaults(func=modules.makedocs)
+
+
 if __name__ == "__main__":
     # parse the args, and call default function
     args = parser.parse_args()
