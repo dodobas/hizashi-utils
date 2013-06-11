@@ -4,7 +4,7 @@ import sys
 
 from django.core import management
 
-from .utils import is_hizashi_project
+from .utils import HIZASHI_ID, get_hizashi_project, CHDir
 
 
 def initproject(args):
@@ -21,6 +21,14 @@ def initproject(args):
         template=args.template,
         extensions=['.py', '.rst'], verbosity=0)
 
+    project_folder = os.path.join(os.getcwd(), args.project_name)
+    project_identifier = os.path.join(project_folder, HIZASHI_ID)
+    with open(project_identifier, 'wb') as proj_file:
+        proj_file.write(
+            "DO NOT DELETE\n\n"
+            "Django Hizashi project identifier.\n\n"
+            "DO NOT DELETE\n")
+
     print(' ...done')
 
 
@@ -28,25 +36,18 @@ def initapp(args):
     """
     Initializes Django Hizashi application
     """
-    if not(is_hizashi_project()):
-        print(
-            'Path "{0}", doesn\'t look like a Django Hizashi project folder.\n'
-            'Please change your current working directory to the '
-            '\'django_project\' folder which is in the root of Hizashi '
-            'project folder.'.format(os.getcwd())
-        )
-        # terminate
-        sys.exit(1)
+    hizashi_project = get_hizashi_project()
 
     print(
         'Initializing Django Hizashi application... {}'
         .format(args.application_name),
         end='')
 
-    management.call_command(
-        'startapp', args.application_name,
-        template=args.template,
-        verbosity=0)
+    with CHDir(hizashi_project):
+        management.call_command(
+            'startapp', args.application_name,
+            template=args.template,
+            verbosity=0)
 
     print(' ...done')
     print(
