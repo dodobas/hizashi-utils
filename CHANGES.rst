@@ -1,7 +1,7 @@
 Changelog
 =========
 
-* 2013-06-13 - released `hizashi-utils 0.3.x <https://github.com/dodobas/hizashi-utils/tree/0.3.x>`_
+* 2013-06-13 - released `hizashi-utils 0.3.1 <https://github.com/dodobas/hizashi-utils/tree/0.3.1>`_
 
   * Added *devserver* command
   * Added *collectstatic* command
