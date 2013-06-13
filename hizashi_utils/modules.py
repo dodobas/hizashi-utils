@@ -122,3 +122,29 @@ def devserver(args):
         management.call_command(
             'runserver',
             verbosity=0)
+
+
+def colstatic(args):
+    """
+    Execute Django collectstatic management command
+    """
+    hizashi_project = get_hizashi_project()
+
+    # set default dev settings
+    os.environ.setdefault(
+        'DJANGO_SETTINGS_MODULE',
+        get_dev_settings_for_user())
+
+    # override settings if user provided as an argument
+    if args.settings:
+        os.environ['DJANGO_SETTINGS_MODULE'] = args.settings
+
+    # append project path to sys.path
+    sys.path.append(hizashi_project)
+
+    with CHDir(hizashi_project):
+        management.call_command(
+            'collectstatic',
+            interactive=False,
+            clear=True,
+            verbosity=0)

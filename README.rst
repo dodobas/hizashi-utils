@@ -71,6 +71,21 @@ Optional parameters:
 
 * *settings* - override automatically detected settings file
 
+collectstatic
+^^^^^^^^^^^^^
+
+Runs *collectstatic* Django management comamnd, using developer specific
+settings module or fallbacks to the default development settings module
+*core.settings.dev*.
+
+To start the server execute::
+
+    hizashi.py collectstatic
+
+Optional parameters:
+
+* *settings* - override automatically detected settings file
+
 
 Application level utilities
 ---------------------------

@@ -70,6 +70,18 @@ parser_devserver.add_argument(
 )
 parser_devserver.set_defaults(func=modules.devserver)
 
+# initapp options
+parser_colstatic = subparsers.add_parser(
+    'collectstatic', help='Executes Django "collectstatic" management command'
+)
+parser_colstatic.add_argument(
+    '--settings', type=str, help=(
+        'The Python path to a settings module, e.g. "myproject.settings.main".'
+        ' If this isn\'t provided, the DJANGO_SETTINGS_MODULE environment '
+        'variable will be used.')
+)
+parser_colstatic.set_defaults(func=modules.colstatic)
+
 
 if __name__ == "__main__":
     # parse the args, and call default function
