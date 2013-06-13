@@ -60,6 +60,9 @@ def initapp(args):
 
 
 def makedocs(args):
+    """
+    Build Project documentation and optionally start a Publish server
+    """
     try:
         import sphinx
     except ImportError:
@@ -77,7 +80,9 @@ def makedocs(args):
             sys.exit(1)
 
     if args.publish and args.type in ('html', 'dirhtml', 'singlehtml'):
-        docs_build_path = os.path.join(docs_path, 'build', 'html')
+        docs_build_path = os.path.join(docs_path, 'build', args.type)
+
+        # start Publish server
         with CHDir(docs_build_path):
             import SimpleHTTPServer
             import SocketServer
