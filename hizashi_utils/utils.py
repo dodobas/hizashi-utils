@@ -86,3 +86,29 @@ def get_hizashi_root():
         )
         # terminate
         sys.exit(1)
+
+
+def get_dev_settings_for_user():
+    """
+    Returns development settings module
+
+    Function actually checks if a developer specific settings module exists.
+    For example, a system user 'philip' will have the 'dev_philip.py'
+    settings module.
+
+    If there is no developer specific settings module, fallback to the 'dev.py'
+    """
+    # try to pick up currently logged in user dev settings
+    user = os.getlogin()
+    user_settings = 'dev_{}.py'.format(user)
+
+    project_path = get_hizashi_project()
+
+    user_dev_settings = os.path.join(
+        project_path, 'core', 'settings', user_settings)
+
+    if is_file(user_dev_settings):
+        return 'core.settings.dev_{}'.format(user)
+    else:
+        # return default settings
+        return 'core.settings.dev'

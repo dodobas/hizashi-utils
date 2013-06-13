@@ -8,6 +8,7 @@ from .utils import (
     HIZASHI_ID, CHDir,
     get_hizashi_project,
     get_docs_folder,
+    get_dev_settings_for_user,
 )
 
 
@@ -97,3 +98,27 @@ def makedocs(args):
                 args.port, sep='')
             print('\nTerminate with CTRL-C\n')
             httpd.serve_forever()
+
+
+def devserver(args):
+    """
+    Run Django Hizashi development server
+    """
+    hizashi_project = get_hizashi_project()
+
+    # set default dev settings
+    os.environ.setdefault(
+        'DJANGO_SETTINGS_MODULE',
+        get_dev_settings_for_user())
+
+    # override settings if user provided as an argument
+    if args.settings:
+        os.environ['DJANGO_SETTINGS_MODULE'] = args.settings
+
+    # append project path to sys.path
+    sys.path.append(hizashi_project)
+
+    with CHDir(hizashi_project):
+        management.call_command(
+            'runserver',
+            verbosity=0)

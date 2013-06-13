@@ -58,6 +58,18 @@ parser_makedocs.add_argument(
 )
 parser_makedocs.set_defaults(func=modules.makedocs)
 
+# initapp options
+parser_devserver = subparsers.add_parser(
+    'devserver', help='Starts Django Hizashi development server'
+)
+parser_devserver.add_argument(
+    '--settings', type=str, help=(
+        'The Python path to a settings module, e.g. "myproject.settings.main".'
+        ' If this isn\'t provided, the DJANGO_SETTINGS_MODULE environment '
+        'variable will be used.')
+)
+parser_devserver.set_defaults(func=modules.devserver)
+
 
 if __name__ == "__main__":
     # parse the args, and call default function

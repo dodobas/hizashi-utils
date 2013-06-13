@@ -1,6 +1,10 @@
 Changelog
 =========
 
+* 2013-06-13 - released `hizashi-utils 0.3.x <https://github.com/dodobas/hizashi-utils/tree/0.3.x>`_
+
+  * Added *devserver* command
+
 * 2013-06-11 - released `hizashi-utils 0.3.0 <https://github.com/dodobas/hizashi-utils/tree/0.3.0>`_
 
   * Added *makedocs* command

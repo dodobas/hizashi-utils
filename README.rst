@@ -45,7 +45,7 @@ Optional parameters:
 makedocs
 ^^^^^^^^
 
-To builds Sphinx docs execute:
+To build Sphinx docs execute:
 
     hizashi.py makedocs
 
@@ -55,6 +55,21 @@ Optional parameters:
 * *publish* - switch to activate the Publish server, a documentation HTTP server
 * *host* - Publish server host, defaults to '127.0.0.1'
 * *port* - Publish server port, defaults to '54299'
+
+
+devserver
+^^^^^^^^^
+
+Starts Django development server, using developer specific settings module or
+fallbacks to the default development settings module *core.settings.dev*.
+
+To start the server execute::
+
+    hizashi.py devserver
+
+Optional parameters:
+
+* *settings* - override automatically detected settings file
 
 
 Application level utilities
