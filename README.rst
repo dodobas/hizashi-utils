@@ -33,7 +33,7 @@ Project level utilities
 initproject
 ^^^^^^^^^^^
 
-To initialize a new project execute:
+To initialize a new project execute::
 
     hizashi.py initproject my_new_project_name
 
@@ -45,7 +45,7 @@ Optional parameters:
 makedocs
 ^^^^^^^^
 
-To build Sphinx docs execute:
+To build Sphinx docs execute::
 
     hizashi.py makedocs
 
@@ -93,7 +93,7 @@ Application level utilities
 initapp
 ^^^^^^^
 
-To initialize a new application execute:
+To initialize a new application execute::
 
     hizashi.py initapp my_new_application_name
 

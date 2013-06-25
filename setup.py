@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='hizashi-utils',
-    version='0.3.1',
+    version='0.3.2',
     author='Dražen Odobašić',
     author_email='dodobasic@gmail.com',
     packages=find_packages(),

@@ -121,7 +121,7 @@ def devserver(args):
     with CHDir(hizashi_project):
         management.call_command(
             'runserver',
-            verbosity=0)
+            verbosity=1)
 
 
 def colstatic(args):
