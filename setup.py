@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='hizashi-utils',
-    version='0.3.2',
+    version='0.4.0',
     author='Dražen Odobašić',
     author_email='dodobasic@gmail.com',
     packages=find_packages(),
@@ -32,6 +32,6 @@ setup(
         "setuptools_git >= 0.3"
     ],
     install_requires=[
-        "Django >= 1.5"
+        "Django >= 1.7,<1.8"
     ]
 )
