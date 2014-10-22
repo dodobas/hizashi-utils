@@ -3,6 +3,7 @@ import os
 import sys
 
 from django.core import management
+import django
 
 from .utils import (
     HIZASHI_ID, CHDir,
@@ -117,6 +118,9 @@ def devserver(args):
 
     # append project path to sys.path
     sys.path.append(hizashi_project)
+
+    # initialize django
+    django.setup()
 
     with CHDir(hizashi_project):
         management.call_command(
