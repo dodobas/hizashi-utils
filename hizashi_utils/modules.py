@@ -3,13 +3,13 @@ import os
 import sys
 
 from django.core import management
-import django
 
 from .utils import (
     HIZASHI_ID, CHDir,
     get_hizashi_project,
     get_docs_folder,
-    get_dev_settings_for_user,
+    run_command_in_dev,
+    run_command_in_prod
 )
 
 
@@ -114,54 +114,11 @@ def devserver(args):
     """
     Run Django Hizashi development server
     """
-    hizashi_project = get_hizashi_project()
-
-    # set default dev settings
-    os.environ.setdefault(
-        'DJANGO_SETTINGS_MODULE',
-        get_dev_settings_for_user()
-    )
-
-    # override settings if user provided as an argument
-    if args.settings:
-        os.environ['DJANGO_SETTINGS_MODULE'] = args.settings
-
-    # append project path to sys.path
-    sys.path.append(hizashi_project)
-
-    # initialize django
-    django.setup()
-
-    with CHDir(hizashi_project):
-        management.call_command(
-            'runserver',
-            verbosity=1
-        )
+    run_command_in_dev(args, 'runserver', verbosity=1)
 
 
 def colstatic(args):
     """
     Execute Django collectstatic management command
     """
-    hizashi_project = get_hizashi_project()
-
-    # set default dev settings
-    os.environ.setdefault(
-        'DJANGO_SETTINGS_MODULE',
-        get_dev_settings_for_user()
-    )
-
-    # override settings if user provided as an argument
-    if args.settings:
-        os.environ['DJANGO_SETTINGS_MODULE'] = args.settings
-
-    # append project path to sys.path
-    sys.path.append(hizashi_project)
-
-    with CHDir(hizashi_project):
-        management.call_command(
-            'collectstatic',
-            interactive=False,
-            clear=True,
-            verbosity=0
-        )
+    run_command_in_prod(args, 'collectstatic', interactive=False, verbosity=0)

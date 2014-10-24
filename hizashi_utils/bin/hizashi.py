@@ -60,7 +60,7 @@ parser_makedocs.add_argument(
 )
 parser_makedocs.set_defaults(func=modules.makedocs)
 
-# initapp options
+# devserver options
 parser_devserver = subparsers.add_parser(
     'devserver', help='Starts Django Hizashi development server'
 )
@@ -73,7 +73,7 @@ parser_devserver.add_argument(
 )
 parser_devserver.set_defaults(func=modules.devserver)
 
-# initapp options
+# collectstatic options
 parser_colstatic = subparsers.add_parser(
     'collectstatic', help='Executes Django "collectstatic" management command'
 )
