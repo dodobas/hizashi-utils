@@ -20,12 +20,14 @@ def initproject(args):
     print(
         'Initializing Django Hizashi project... {}'
         .format(args.project_name),
-        end='')
+        end=''
+    )
 
     management.call_command(
         'startproject', args.project_name,
         template=args.template,
-        extensions=['.py', '.rst'], verbosity=0)
+        extensions=['.py', '.rst'], verbosity=0
+    )
 
     # create Hizashi project identification file
     project_folder = os.path.join(os.getcwd(), args.project_name)
@@ -34,7 +36,8 @@ def initproject(args):
         proj_file.write(
             "DO NOT DELETE\n\n"
             "Django Hizashi project identifier.\n\n"
-            "DO NOT DELETE\n")
+            "DO NOT DELETE\n"
+        )
     print(' ...done')
 
 
@@ -47,18 +50,21 @@ def initapp(args):
     print(
         'Initializing Django Hizashi application... {}'
         .format(args.application_name),
-        end='')
+        end=''
+    )
 
     with CHDir(hizashi_project):
         management.call_command(
             'startapp', args.application_name,
             template=args.template,
-            verbosity=0)
+            verbosity=0
+        )
 
     print(' ...done')
     print(
         '\nAdd \'{}\' to INSTALLED_APPS in \'core/settings/project.py\''
-        .format(args.application_name))
+        .format(args.application_name)
+    )
 
 
 def makedocs(args):
@@ -70,12 +76,14 @@ def makedocs(args):
     except ImportError:
         print(
             'Sphinx package is missing, please install it in your virtualenv'
-            'using pip: "pip install Sphinx"')
+            'using pip: "pip install Sphinx"'
+        )
     docs_path = get_docs_folder()
 
     with CHDir(docs_path):
         build_result = sphinx.main(
-            ['dummy_arg', '-b', args.type, 'source', 'build/html'])
+            ['dummy_arg', '-b', args.type, 'source', 'build/html']
+        )
 
         if build_result:
             # on any error during the build, terminate
@@ -96,7 +104,8 @@ def makedocs(args):
 
             print(
                 'Publish server address: http://', args.host, ':',
-                args.port, sep='')
+                args.port, sep=''
+            )
             print('\nTerminate with CTRL-C\n')
             httpd.serve_forever()
 
@@ -110,7 +119,8 @@ def devserver(args):
     # set default dev settings
     os.environ.setdefault(
         'DJANGO_SETTINGS_MODULE',
-        get_dev_settings_for_user())
+        get_dev_settings_for_user()
+    )
 
     # override settings if user provided as an argument
     if args.settings:
@@ -125,7 +135,8 @@ def devserver(args):
     with CHDir(hizashi_project):
         management.call_command(
             'runserver',
-            verbosity=1)
+            verbosity=1
+        )
 
 
 def colstatic(args):
@@ -137,7 +148,8 @@ def colstatic(args):
     # set default dev settings
     os.environ.setdefault(
         'DJANGO_SETTINGS_MODULE',
-        get_dev_settings_for_user())
+        get_dev_settings_for_user()
+    )
 
     # override settings if user provided as an argument
     if args.settings:
@@ -151,4 +163,5 @@ def colstatic(args):
             'collectstatic',
             interactive=False,
             clear=True,
-            verbosity=0)
+            verbosity=0
+        )

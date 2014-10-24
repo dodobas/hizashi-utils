@@ -29,7 +29,8 @@ def is_writable(path):
     else:
         print(
             'Path "{0}" is not writeable by the current user or it doesn\'t '
-            'exist.'.format(path))
+            'exist.'.format(path)
+        )
         # terminate
         sys.exit(1)
 
@@ -105,7 +106,8 @@ def get_dev_settings_for_user():
     project_path = get_hizashi_project()
 
     user_dev_settings = os.path.join(
-        project_path, 'core', 'settings', user_settings)
+        project_path, 'core', 'settings', user_settings
+    )
 
     if is_file(user_dev_settings):
         return 'core.settings.dev_{}'.format(user)

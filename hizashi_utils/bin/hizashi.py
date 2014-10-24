@@ -17,7 +17,8 @@ parser_initproject.add_argument(
     '--template', type=str, help='Django Project template folder/archive',
     default=(
         'https://github.com/dodobas/hizashi-project-template/archive/'
-        'master.zip')
+        'master.zip'
+    )
 )
 parser_initproject.set_defaults(func=modules.initproject)
 
@@ -31,7 +32,8 @@ parser_initapp.add_argument(
     '--template', type=str, help='Application template folder/archive',
     default=(
         'https://github.com/dodobas/hizashi-application-template/archive/'
-        'master.zip')
+        'master.zip'
+    )
 )
 parser_initapp.set_defaults(func=modules.initapp)
 
@@ -66,7 +68,8 @@ parser_devserver.add_argument(
     '--settings', type=str, help=(
         'The Python path to a settings module, e.g. "myproject.settings.main".'
         ' If this isn\'t provided, the DJANGO_SETTINGS_MODULE environment '
-        'variable will be used.')
+        'variable will be used.'
+    )
 )
 parser_devserver.set_defaults(func=modules.devserver)
 
@@ -78,7 +81,8 @@ parser_colstatic.add_argument(
     '--settings', type=str, help=(
         'The Python path to a settings module, e.g. "myproject.settings.main".'
         ' If this isn\'t provided, the DJANGO_SETTINGS_MODULE environment '
-        'variable will be used.')
+        'variable will be used.'
+    )
 )
 parser_colstatic.set_defaults(func=modules.colstatic)
 
