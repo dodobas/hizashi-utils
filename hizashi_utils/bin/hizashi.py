@@ -86,6 +86,19 @@ parser_colstatic.add_argument(
 )
 parser_colstatic.set_defaults(func=modules.colstatic)
 
+# test options
+parser_test = subparsers.add_parser(
+    'test', help='Executes Django "test" management command'
+)
+parser_test.add_argument(
+    '--settings', type=str, help=(
+        'The Python path to a settings module, e.g. "myproject.settings.main".'
+        ' If this isn\'t provided, the DJANGO_SETTINGS_MODULE environment '
+        'variable will be used.'
+    )
+)
+parser_test.set_defaults(func=modules.run_tests)
+
 
 if __name__ == "__main__":
     # parse the args, and call default function

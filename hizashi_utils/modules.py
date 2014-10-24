@@ -9,7 +9,8 @@ from .utils import (
     get_hizashi_project,
     get_docs_folder,
     run_command_in_dev,
-    run_command_in_prod
+    run_command_in_prod,
+    run_command_in_test
 )
 
 
@@ -122,3 +123,10 @@ def colstatic(args):
     Execute Django collectstatic management command
     """
     run_command_in_prod(args, 'collectstatic', interactive=False, verbosity=0)
+
+
+def run_tests(args):
+    """
+    Execute Django test management command
+    """
+    run_command_in_test(args, 'test', verbosity=2)
