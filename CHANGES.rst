@@ -1,6 +1,11 @@
 Changelog
 =========
 
+* 2014-10-24 - released `hizashi-utils 0.4.1 <https://github.com/dodobas/hizashi-utils/tree/0.4.1>`_
+
+  * Added *test* command
+  * Support for Django 1.7
+
 * 2013-06-13 - released `hizashi-utils 0.3.1 <https://github.com/dodobas/hizashi-utils/tree/0.3.1>`_
 
   * Added *devserver* command
